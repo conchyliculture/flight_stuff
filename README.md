@@ -29,3 +29,12 @@ The script requires some information from your current install of airtrail. It w
 
 
 Then `/tmp/airtrail.json` can be imported into [AirTrail](https://airtrail.johan.ohly.dk/).
+
+
+## Some AirTrail tips & tricks
+
+Add TXL back to airports (rip):
+
+```bash
+docker exec --user root -it airtrail_db psql -U airtrail -d airtrail -c "INSERT INTO airport VALUES ('EDDT', 'TXL', 52.55925537956253, 13.290615673504504, 'Europe/Berlin', 'Berlin TXL', 'large_airport', 'EU', 'DE', 't');
+```
