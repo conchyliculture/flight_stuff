@@ -10,7 +10,7 @@ $ ruby flighty2fr24.rb /tmp/FlightyExport-2025-06-17.csv /tmp/fr24.csv
 
 Then `/tmp/fr24.csv` can be either imported into flightradar24.com, or [AirTrail](https://airtrail.johan.ohly.dk/).
 
-## flighty2fr24.rb
+## flighty2airtrail.rb
 
 ```bash
 $ ruby flighty2airtrail.rb /tmp/FlightyExport-2025-06-17.csv /tmp/airtrail.json
