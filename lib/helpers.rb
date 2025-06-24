@@ -66,10 +66,19 @@ class KnowledgeBase
   end
 
   def aircraft_fullname(aircraft)
-    return nil unless aircraft
+    avion = get_aircraft(aircraft)
+    if avion
+      return "#{avion['ManufacturerCode'].downcase.capitalize} #{avion['ModelFullName']} (#{avion['Designator']})"
+    end
+
+    return aircraft
+  end
+
+  def get_aircraft(aircraft_string)
+    return nil unless aircraft_string
 
     avion = nil
-    aircraft = aircraft.strip()
+    aircraft = aircraft_string.strip()
     case aircraft
     when "Fairchild Merlin/Metro/Expediter"
       return aircraft
@@ -90,11 +99,7 @@ class KnowledgeBase
     when /CRJ.00/
       avion = @aircrafts.select { |a| a["ModelFullName"].end_with?(aircraft.gsub("Bombardier ", "").gsub("CRJ", "CRJ-")) }[0]
     end
-    if avion
-      return "#{avion['ManufacturerCode'].downcase.capitalize} #{avion['ModelFullName']} (#{avion['Designator']})"
-    end
-
-    return aircraft
+    return avion
   end
 
   def airport_tz(code)

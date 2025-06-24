@@ -80,6 +80,10 @@ class Converter
       if cabin == "PREMIUM_ECONOMY"
         cabin = "economy+"
       end
+      aircraft = @kb.get_aircraft(row["Aircraft Type Name"])
+      if aircraft
+        aircraft = aircraft['Designator']
+      end
       flight = {
         "date" => row["Date"],
         "from" => get_airport(row["From"]),
@@ -90,7 +94,7 @@ class Converter
         "flightNumber" => row["Airline"] + row["Flight"],
         "flightReason" => row["Flight Reason"]&.downcase,
         "airline" => row["Airline"],
-        "aircraft" => @kb.aircraft_fullname(row["Aircraft"]),
+        "aircraft" => aircraft,
         "aircraftReg" => row["Tail Number"],
         "note" => row["Notes"],
         "seats" => [
