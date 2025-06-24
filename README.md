@@ -5,7 +5,27 @@ Collection of helpful scripts for flight logging stuff
 ## flighty2fr24.rb
 
 ```bash
-ruby flighty2fr24.rb /tmp/FlightyExport-2025-06-17.csv /tmp/fr24.csv
+$ ruby flighty2fr24.rb /tmp/FlightyExport-2025-06-17.csv /tmp/fr24.csv
 ```
 
-Then `fr24` can be either imported into flightradar24.com, or [AirTrail](https://airtrail.johan.ohly.dk/).
+Then `/tmp/fr24.csv` can be either imported into flightradar24.com, or [AirTrail](https://airtrail.johan.ohly.dk/).
+
+## flighty2fr24.rb
+
+```bash
+$ ruby flighty2airtrail.rb /tmp/FlightyExport-2025-06-17.csv /tmp/airtrail.json
+
+From your docker host, run: 
+
+  docker exec --user root -it airtrail_db psql -U airtrail -d airtrail -c "select id, username, display_name from public.user"
+
+Then please provide the following:
+         user_id: hvdhwqsfdqdsf
+         username: test
+         display_name: test
+```
+
+The script requires some information from your current install of airtrail. It will only work for a single user.
+
+
+Then `/tmp/airtrail.json` can be imported into [AirTrail](https://airtrail.johan.ohly.dk/).
