@@ -37,8 +37,46 @@ Then `/tmp/airtrail.json` can be imported into [AirTrail](https://airtrail.johan
 
 ## Some AirTrail tips & tricks
 
-Add TXL back to airports (rip):
+### Add TXL back to airports (rip):
 
 ```bash
 docker exec --user root -it airtrail_db psql -U airtrail -d airtrail -c "INSERT INTO airport VALUES ('EDDT', 'TXL', 52.55925537956253, 13.290615673504504, 'Europe/Berlin', 'Berlin TXL', 'large_airport', 'EU', 'DE', 't');
+```
+
+### Add old airlines
+
+Unfortunately, there is no way to add custom airlines for now
+
+```bash
+
+$ git clone https://github.com/johanohly/AirTrail/
+# Edit src/lib/data/airlines.ts and add the airline object you need:
+# 
+#  {
+#    Code: "JP",
+#    ICAO: "ADR",
+#    Name: "Adria Airways"
+#  },
+
+$ cd AirTrail/docker
+$ bash build.sh
+
+```
+
+### Add aircrafts
+
+Unfortunately, there is no way to add custom aircrafts for now
+
+```bash
+
+$ git clone https://github.com/johanohly/AirTrail/
+# Edit src/lib/data/aircraft.ts and add the aircraft object you need:
+#  {
+#    name: 'Airbus Helicopter H-120 Colibri',
+#    icao: 'EC20',
+#    wtc: 'L',
+#  },
+$ cd AirTrail/docker
+$ bash build.sh
+
 ```
