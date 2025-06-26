@@ -99,7 +99,7 @@ class Converter
         "note" => row["Notes"],
         "seats" => [
           {
-            "userId" => "njq3hiookplgpf6",
+            "userId" => user_id,
             "guestName" => nil,
             "seat" => row["Seat Type"],
             "seatNumber" => row["Seat"],
