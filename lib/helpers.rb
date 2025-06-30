@@ -81,7 +81,7 @@ class KnowledgeBase
     aircraft = aircraft_string.strip()
     case aircraft
     when "Fairchild Merlin/Metro/Expediter"
-      return aircraft
+      return {"ModelFullName" => aircraft}
     when /Airbus A/
       avion = @aircrafts.select { |a| a["ModelFullName"].start_with?(aircraft.gsub("Airbus A", "A-")) }[0]
     when /Boeing 737 MAX/
@@ -130,5 +130,25 @@ class KnowledgeBase
 
     sec = dt_arrival - dt_departure
     return sec
+  end
+
+  def get_airline(code)
+    res = nil
+    if code.size == 2
+      res = @airlines.select{|airline| airline['iata'] == code }
+    elsif code.size == 3
+      res = @airlines.select{|airline| airline['icao'] == code }
+    else
+      raise StandardError, "Illegal airline code : #{code}"
+    end
+
+    case res.size
+    when 1
+      return res[0]
+    when 0
+      raise StandardError, "Could not find airline with code #{code}"
+    else
+      raise StandardError, "Found too many airlines matching code #{code}"
+    end
   end
 end
